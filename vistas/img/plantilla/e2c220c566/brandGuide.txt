@@ -1,0 +1,4 @@
+Logo colors: #282561 
+Icon colors: 
+Text colors: #2F6122 
+Fonts: Miniver 
