@@ -15,7 +15,6 @@
         <li class="active">Administrar DEVOLUCIONES</li>
       </ol>
     </section>
-    
 
     <!-- Main content -->
     <section class="content">
@@ -29,16 +28,13 @@
           <table class="table table-bordered table-striped dt-responsive tablas">
             <thead>
               <tr>
-                
                 <th>FECHA</th> 
-                <th>MOTIVO</th> 
-                <th>VENDEDOR</th>
-                <th>CLIENTE</th> 
-                <th>CODIGO_FACTURA</th>
-                <th>Acciones</th>
+                <th>VENDEDOR</th> 
+                <th>CLIENTES</th> 
+                <th>PRODUCTOS</th> 
+                <th>Motivo</th> 
           
           
-
               
               
               
@@ -48,87 +44,34 @@
             </thead>
             <tbody> 
             <?php  
-
-                    $devoluciones=Controladordevoluciones::crtmostrarDevolucion();
-
-                    //var_dump($devoluciones);
-
-                    foreach($devoluciones as $value){
-                      
-
-            
-                      echo
-                      '<tr>
-                      
-                      <td>'.$value['fecha'].'</td>
-                      <td>'.$value['motivo'].'</td>';
-
-
-                        $itemUsuario = "id_usuario";
-                        $valorUsuario = $value["usuario_id"];
-
-                        $respuestaUsuario = ControladorUsuarios::mostrarUsuarios($itemUsuario,$valorUsuario);
-
-                        echo '<td>'.$respuestaUsuario["nombre"].'</td>';
-
-                        $itemCliente = "id_cliente";
-                        $valorCliente = $value["cliente_id"];
-      
-                        $respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente,$valorCliente);
-      
-                        echo '<td>'.$respuestaCliente["nombre"] .'   '. $respuestaCliente['apellido'].'</td>';
-
-                        $fechaInicial=null;
-                        $fechaFinal=null;
-                        $item='id_factura';
-                        $valor=$value['factura_id'];
-                        $resultado=ControladorVenta::ctrMostrarVentas($item,$valor,$fechaInicial,$fechaFinal);
-                        //var_dump($resultado);
-  
-                        echo '<td>'. $resultado['codigo_factura'].'</td>';
-
-
-
-                        echo '<td>
-
-
-
-                        <div class="btn-group">
-
-
-                          
-                          <a href="index.php?ruta=detalledevolucioness&idDevolucion='.$value['id_devolucion'].'">
-
-                          <button class="btn btn-info btnImprimirDevolucion"  idDevolucion="'.$value['id_devolucion'].'"
-                          
-                          data-toggle="modal" data-target="#MostrarDetalle">
-
-                            <i class="fa fa-eye"></i>
-
-                          </button>
-
-                          </a>
-
-
-
-
-
-                        </td>
-
-
-
-
-
-
-
-                        </tr>';
                 
+                $devoluciones=Controladordevoluciones::crtmostrarDevolucion();
 
-                    }
+                //var_dump($devoluciones);
+
+                foreach($devoluciones as $value){
+
+                    echo '
+                    </tr>
+                        <td>'.$value['fecha'].' </td>
+                        <td>'.$value['Vendedor'].' </td>
+                        <td>'.$value['cliente'].' </td>
+                        <td>'.$value['productos'].' </td>
+                        <td>'.$value['motivo'].' </td>
 
 
 
+
+
+                    
+                    </tr>
+                    
+                    ';
+
+                }
+                
                 ?>
+
             
             
             
@@ -147,5 +90,3 @@
       
 
     </section>
-    
- </div>

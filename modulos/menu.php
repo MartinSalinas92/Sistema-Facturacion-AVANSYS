@@ -114,30 +114,18 @@
 
                 </a>
 
-            </li>   
-            <li> 
-
-                <a href='devoluciones-vistas'>
-                                                            
-                <i class="fa fa-arrow-left" aria-hidden="true"></i>                  
-                                                                                
-                    <span>Devoluciones </span>
-
-                </a>
-
-            </li>   
+            </li>     
             <li> 
 
                 <a href='clientes'>
                                                             
-                <i class="fa fa-users"></i>                    
+                <i class="fa fa-users" aria-hidden="true"></i>                  
                                                                                 
-                    <span>clientes </span>
+                    <span>Clientes </span>
 
                 </a>
 
-            </li>   
-            </li>   
+            </li>     
             <li> 
 
                 <a href='ventas'>

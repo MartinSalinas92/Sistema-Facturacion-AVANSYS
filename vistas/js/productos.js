@@ -168,6 +168,7 @@ EDITAR PRODUCTO
 				res = JSON.parse(respuesta);
 			   console.log('respuesta',res.imagen);
 			   $("#idProductos").val(res.id_producto);
+			   $("#EditarNombreProducto").val(res.nombre);
 			   $("#EditarDescripcion").val(res.descripcion);
 			   $("#EditarCodigo").val(res.codigo);
 			   $("#EditarPrecioCompra").val(res.precio_compra);
@@ -193,11 +194,8 @@ EDITAR PRODUCTO
 	 
 			   });
 			}
-		
 
-			
-	
-/*=============================================
+			/*=============================================
 ACTIVAR PRODUCTO
 =============================================*/
 
@@ -242,5 +240,6 @@ $(document).on("click", ".btnActivarProducto", function(){
 
 
 });
+		
 	
 	

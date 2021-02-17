@@ -18,7 +18,6 @@ require_once "../../../modelos/productos.modelo.php";
 class ImprimirFactura{
 
 
-
 public function traerImpresionFactura(){
     $fechaInicial=null;
     $fechaFinal=null;
@@ -43,7 +42,6 @@ public function traerImpresionFactura(){
     $item='id_cliente';
     $itemValor=$resultado['cliente_id'];
     $respuestaCliente=ControladorClientes::ctrMostrarClientes($item,$itemValor);
-    var_dump($respuestaCliente);
     
 
 
@@ -93,14 +91,21 @@ $bloque1 = <<<EOF
 
 <table> 
     <tr>
-        <td style="width:150px"><img src="images/color_logo_black.png"></td>
+        <td style="width:150px"><img src="images/Hebreos.jpg"></td>
             <td style="background-color:white; width:140px">
                 <div style="font-size:8.5px; text-align:right; line-height:10px;"> 
                 <br>
-                CUIT: 71.759.963-9
+                    <span>Rodrigo David Acosta Florentin </span>
 
                 <br>
-                Dirección: Calle 44B 92-11
+                <br>
+                CUIT: 24-34598692-4
+
+                <br>
+                Dirección: Glogieri 1790
+            
+
+                3600-FORMOSA
                 
                 </div>
             </td>
@@ -110,10 +115,10 @@ $bloque1 = <<<EOF
             <div style="font-size:8.5px; text-align:right; line-height:10px;">
                 
                 <br>
-                Teléfono: 3794148968
+                Teléfono: 3704943172
                 
                 <br>
-                ventas@inventorysystem.com
+                    rodrigoflorentin439@gmail.com
 
             </div>
             
@@ -153,7 +158,7 @@ $bloque2 = <<<EOF
     <tr> 
                 <td style="border: 1px solid #666; background-color:white; width:390px">
 
-                     Cliente: $respuestaCliente[nombre] $respuestaCliente[apellido]
+                     Cliente: $respuestaCliente[nombre]
 
                 </td>
                 <td style="border: 1px solid #666; background-color:white; width:75px">
@@ -205,7 +210,6 @@ $bloque3 =
         <th style="border: 1px solid #666; background-color:white; width:70px; text-align:center">SubTotal</th>
     </tr>
 </thead>
-
 <tbody>';
 foreach ($resultadoDetalle as $res) {
     $item='id_producto';
@@ -213,7 +217,7 @@ foreach ($resultadoDetalle as $res) {
     $Mostrarproductos=ControladorProductos::ctrMostrarProductos($item,$value);
     $bloque3 .= '<tr>
                     <td style="border: 1px solid #666; color:#333; background-color:white; width:150px; text-align:center">
-                '.$Mostrarproductos["descripcion"].'
+                '.$Mostrarproductos["nombre"].'
             </td>
 
             <td style="border: 1px solid #666; color:#333; background-color:white; width:80px; text-align:center">

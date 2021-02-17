@@ -23,7 +23,7 @@
 
           <div class="box box-success">
                 <div class="box-header with-border"> </div>
-                <form role="form" method="post" class="formularioCompra">
+                <form role="form" method="post" class="formularioVenta">
                  
                   <div class="box-body"> 
                       
@@ -36,6 +36,40 @@
                                     <span class="input-group-addon"><i class="fa fa-user"> </i> </span> 
                                     <input type="text" class="form-control input-lg" id="nuevoVendedor" name="nuevoVendedor" value="<?php echo $_SESSION['nombre'] ?>" readonly>
                                     <input type="hidden" name="idVendedor" value="<?php echo $_SESSION['id_usuario'] ?>">
+                        
+                                  </div>
+                                </div>
+                                <!--======================================================
+                               ENTRADA DE VENTA
+                              =========================================================-->
+                              <div class="form-group">
+                                  <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-key"> </i> </span> 
+
+                                    <?php
+                                    $fechaInicial=null;
+                                    $fechaFinal=null;
+                                    $item=null;
+                                    $valor=null;
+                                    
+                                    $compras=ControladorCompra::ctrMostrarComprasss($fechaInicial,$fechaFinal,$item,$valor);
+
+                                    if(!$compras){
+                                      echo '<input type="text" class="form-control input-lg" id="nuevaVenta" name="nuevaVenta" value="1001" readonly>';
+                                    }else{
+                                      foreach($compras as $values){
+
+                                      }
+                                      $codigo=$values['codigo_factura'] + 1;
+                                      echo '<input type="text" class="form-control input-lg" id="nuevaVenta" name="nuevaVenta" value="'.$codigo.'" readonly>';
+                                    }
+
+                                    
+
+                                    
+                                    
+                                    ?>
+                                  
                         
                                   </div>
                                 </div>
@@ -56,7 +90,7 @@
                                         $valor=null;
                                         $proveedores=ControladorProveedores::crtMostrarProveedores($item,$valor);
                                         foreach($proveedores as $values){
-                                          echo '<option value= '.$values['id_proveedor'].'>'.$values['razon_social'].' </option>';
+                                          echo '<option value= '.$values['id_proveedor'].'>'.$values['nombre'].' </option>';
                                         }
                                   
                                         
@@ -98,7 +132,7 @@
                                ENTRADA DE PRODUCTO
                               =========================================================-->
 
-                              <div class="form-group row nuevoProductoCompra">
+                              <div class="form-group row nuevoProducto">
 
                                
                            
@@ -106,7 +140,7 @@
 
                     
                             </div>
-                            <input type="hidden" name="listarProductosCompra" id="listarProductosCompra">
+                            <input type="hidden" name="listarProductos" id="listarProductos">
                               <!--======================================================
                                 BOTON PARA AGREGAR PRODUCTO
                                 =========================================================-->
@@ -127,7 +161,7 @@
                 <thead>
 
                   <tr>
-                    
+                    <th>Impuesto</th>
                     <th>Total</th>      
                   </tr>
 
@@ -137,14 +171,27 @@
                 
                   <tr>
                     
+                    <td style="width: 50%">
+                      
+                      <div class="input-group">
                     
+                        <input type="number" class="form-control input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta" placeholder="0" required onchange="agregarImpuestos()">
+
+                        
+
+                        <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                  
+                      </div>
+
+                    </td>
+
                     <td style="width: 50%">
                       
                       <div class="input-group">
                     
                         <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
 
-                        <input type="text" class="form-control input-lg nuevoTotalCompra" id="nuevoTotalCompra" name="nuevoTotalCompra" total="" placeholder="00000" readonly required>
+                        <input type="text" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" total="" placeholder="00000" readonly required>
 
                   
                         
@@ -241,7 +288,8 @@
           <table class="table table-bordered table-striped dt-responsive tablas">
           <thead>
               <tr>
-              <th>Imagen</th>  
+              <th>Imagen</th> 
+              <th>Nombre</th> 
               <th>descripcion</th> 
               <th>codigo</th> 
               <th>stock</th>
@@ -270,7 +318,7 @@
                <tr>
  
                <td>';
-              
+            
              
                if($values['imagen'] !=''){
                  echo '<img src="'.$values['imagen'].'" class="img-fluid img-thumbnail" width=40px> ';
@@ -278,7 +326,7 @@
                echo ' <img src="vistas/img/productos/anonymous.png" class="img-fluid img-thumbnail" width=30px> </td>';
              }
              echo '
-               
+                 <td>'.$values['nombre'].'</td>
                  <td>'.$values['descripcion'].'</td>
                  <td>'.$values['codigo'].'</td>';
  
@@ -296,14 +344,12 @@
  
                 
                  echo'
-
-                 
                  
                 
                  <td> 
                  <div class="btn-group">
  
-                 <button class="btn btn-primary btnAgregarProductos" id="btnbtn'.$values['id_producto'].'" idPorducto="'.$values['id_producto'].'" onclick="editarr(\''.$values['id_producto'].'\',\''.$values['descripcion'].'\',\''.$values['stock'].'\',\''.number_format($values['precio_compra'],2).'\',\''.$values['precio_venta'].'\');">
+                 <button class="btn btn-primary btnAgregarProductos" id="btnbtn'.$values['id_producto'].'" idPorducto="'.$values['id_producto'].'" onclick="editarr(\''.$values['id_producto'].'\',\''.$values['nombre'].'\',\''.$values['descripcion'].'\',\''.$values['codigo'].'\',\''.$values['stock'].'\',\''.$values['precio_compra'].'\');">
            
                  <i class="fa fa-plus-square" aria-hidden="true"></i>
                  

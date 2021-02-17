@@ -18,8 +18,8 @@ class MoledoMarca{
         }
         $stmt->close();
         $stmt=null;
-    
     }
+
 
       /*--======================================================
         MOSTRAR MARCAS

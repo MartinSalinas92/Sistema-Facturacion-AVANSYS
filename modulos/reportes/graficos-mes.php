@@ -5,7 +5,7 @@ if(!empty($_GET['fechaInicialporMes'])){
   $item= null;
   $valor= null;
   $respuestaporMes=ControladorVenta::ctrMostrarVentasporFecha($item,$valor,$fechaInicial,$fechaFinal);
-  //var_dump($respuestaporMes);
+  var_dump($respuestaporMes);
 
   $Meses=null;
   foreach($respuestaporMes as $value){
@@ -31,7 +31,6 @@ if(!empty($_GET['fechaInicialporMes'])){
 
 }
   ?>
-  
 
 
 <!--=============================================

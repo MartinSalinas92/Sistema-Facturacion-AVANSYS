@@ -4,7 +4,7 @@
 
 
 
-<div  class="col-lg-4 col-xs-4">
+<div  class="col-lg-6 col-xs-6">
 
   <div style="padding:1em 0;" class="small-box bg-red">
     
@@ -33,7 +33,7 @@
 </div>
 
 
-<div  class="col-lg-4 col-xs-4">
+<div  class="col-lg-6 col-xs-6">
 
   <div style="padding:1em 0;" class="small-box bg-aqua">
     
@@ -61,37 +61,7 @@
 
 </div>
 
-
-<div  class="col-lg-4 col-xs-4">
-
-  <div style="padding:1em 0;" class="small-box bg-green">
-    
-    <div class="inner">
-      
-      <h3>SUBCATEGORIA</h3>
-
-     
-    
-    </div>
-    
-    <div class="icon">
-      
-      <i class="ion ion-social-usd"></i>
-    
-    </div>
-    
-    <a href="#" class="small-box-footer" data-toggle="modal" data-target="#modalGuardarCategoria">
-      
-      Guardar Subcategoria <i class="fa fa-arrow-circle-right"></i>
-    
-    </a>
-
-  </div>
-
 </div>
-</div>
-
-
 
 <!-- <div  class="col-lg-6 col-xs-6">
 
@@ -513,80 +483,3 @@ MODAL ACTUALIZAR PRECIO POR MARCA
   </div>
 
 </div>
-
-<!--=====================================
-MODAL ACTUALIZAR PRECIO POR MARCA
-======================================-->
-
-<div id="modalGuardarCategoria" class="modal fade" role="dialog">
-  
-  <div class="modal-dialog">
-
-    <div class="modal-content">
-
-      <form role="form" method="post">
-
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
-
-        <div class="modal-header" style="background:GREEN; color:white">
-
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-          <h4 class="modal-title">Subcategorias</h4>
-
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-
-        <div class="modal-body">
-
-          <div class="box-body">
-
-             <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
-
-
-            <div class="form-group"> 
-                <div class="input-group"> 
-                <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                    <label> Nombre Subcategoria</label>
-                    <input type="text" class="form-control" id="nuevaSubcategoria" name="nuevaSubcategoria">
-
-                
-                
-                </div>
-            
-            
-            </div>
-
-
-        
-       
-             <div class="modal-footer">
-
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
-
-                <button type="submit" class="btn btn-danger">Guardar</button>
-
-                </div>
-                <?php
-                $subcategoria= new SubcategoriaControlador;
-                $subcategoria->insertarSubcategoriaControlador();
-
-
-                ?>
-            </form>
-
-          </div>
-          </div>
-          </div>
-          </div>
-          </div>
-
-       
-
-
-

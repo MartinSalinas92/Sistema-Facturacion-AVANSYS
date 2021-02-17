@@ -235,4 +235,3 @@ MODAL ACTUALIZAR PRECIO POR MARCA
         </div>
 
         </div>
-

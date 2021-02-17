@@ -7,7 +7,8 @@ class ControladorProductos{
         return $respuesta;
     }
     static public function ctrCrearProductos(){
-        if (isset($_POST['nuevaDescripcion'])){
+        if (isset($_POST['nuevoNombreProducto'])){
+
 
 
                 /*=============================================
@@ -82,7 +83,7 @@ class ControladorProductos{
 
                 $datos= array(
 
-                    
+                    'nombre'=> $_POST['nuevoNombreProducto'],
                     'imagen'=>$ruta,
                     'descripcion'=> $_POST['nuevaDescripcion'],
                     'codigo'=> $_POST['nuevoCodigo'],
@@ -91,8 +92,7 @@ class ControladorProductos{
                     'stock'=>$_POST['nuevaStock'],
                     'stock_min'=>$_POST['nuevaStock_min'],
                     'marca_id'=>$_POST['nuevoMarca'],
-                    'categoria_id'=>$_POST['nuevoCategoria'],
-                    'subcategoria_id'=>$_POST['nuevoSubCategoria'],
+                    'categoria_id'=>$_POST['nuevoCategoria']
                    
 
 
@@ -101,10 +101,7 @@ class ControladorProductos{
                 
 
                 $respuesta=modeloProductos::crearProductos($tabla,$datos);
-                    echo '<script> 
-                    
-                    
-                    </script>';
+        
                 if($respuesta =='ok'){
                     echo'
                     <script>
@@ -148,9 +145,7 @@ class ControladorProductos{
                     
                     }
 
-            }
-
-            
+                }
 
         static public function ctrMostrarProductos($item,$valor){
             $tabla='productos';
@@ -165,9 +160,8 @@ class ControladorProductos{
             return $respuesta;
         }
         static public function ctrEditarProductos(){
-            if (isset($_POST['EditarDescripcion'])){
+            if (isset($_POST['EditarNombreProducto'])){
     
-              
                     /*=============================================
                     VALIDAR IMAGEN
                     =============================================*/
@@ -250,7 +244,7 @@ class ControladorProductos{
     
                     $datos= array(
     
-                    
+                        'nombre'=> $_POST['EditarNombreProducto'],
                         'imagen'=>$ruta,
                         'descripcion'=> $_POST['EditarDescripcion'],
                         'codigo'=> $_POST['EditarCodigo'],
@@ -259,8 +253,7 @@ class ControladorProductos{
                         'stock'=>$_POST['editarStock'],
                         'marca_id'=>$_POST['EditarMarca'],
                         'categoria_id'=>$_POST['EditarCategoria'],
-                        'subcategoria_id'=>$_POST['editarSubCategoria'],
-                        'id_producto'=>$_POST['idProductos']
+                        'id_producto'=>$_POST['idProductos'],
     
     
     
@@ -268,14 +261,17 @@ class ControladorProductos{
                     
     
                     $respuesta=modeloProductos::editarProductos($tabla,$datos);
+                        echo '<script> 
                         
+                        
+                        </script>';
                     if($respuesta =='ok'){
                         echo'
                         <script>
                         
                         swal({
                             type: "success",
-                            title: "¡El producto ha sido modificado correctamente!'.$respuesta.'",
+                            title: "¡El producto ha sido modificado correctamente!",
                             showConfirmButton:true,
                             confirmButtonText: "Cerrar",
                             closeonConfirm: false
@@ -291,7 +287,7 @@ class ControladorProductos{
     
                         }else{
                             echo '<script>
-                                console.log('.$respuesta[0].')     
+                                console.log('.$respuesta[1].')     
                                 swal({
                                     type: "error",
                                     title: "¡EL producto  no puedo ser modificado!",
@@ -311,11 +307,11 @@ class ControladorProductos{
                 
     
                         
-                        }
+                        
     
                 }
     
-                
+                }
     
                 static public function ctrActualizarProductosCategoria(){
                     if(isset($_POST["actualizarPrecioCategoria"])){
@@ -379,48 +375,50 @@ class ControladorProductos{
 					ACTUALIZAR POR MARCA
 					=============================================*/
 
-                static public function ctrActualizarProductosSubCategoria(){
-                    if(isset($_POST["ActualizarMarca"])){
-				
-
-                        $tabla = "productos";
-        
-                        $porcentaje = $_POST["porcentajeSub"];
-        
-                        $marca = $_POST["ActualizarMarca"];
-        
-                        $respuesta = ModeloProductos::mdlActualizaProductoSubCategoria($tabla, $porcentaje, $marca);
-        
-                        if($respuesta == "ok"){
-        
-                            echo'<script>
-        
-                                swal({
-                                      type: "success",
-                                      title: "El precio ha sido editado correctamente '.$marca.' ",
-                                      showConfirmButton: true,
-                                      confirmButtonText: "Cerrar"
-                                      }).then((result) => {
-                                                if (result.value) {
-        
-                                                window.location = "productos";
-        
-                                                }
-                                            })
-        
-                                </script>';
-        
-                        }
-        
-        
-                    }
-                }
+                    static public function ctrActualizarProductosSubCategoria(){
+                        if(isset($_POST["ActualizarMarca"])){
+                    
+    
+                            $tabla = "productos";
             
-        
-
-                }
+                            $porcentaje = $_POST["porcentajeSub"];
+            
+                            $marca = $_POST["ActualizarMarca"];
+            
+                            $respuesta = ModeloProductos::mdlActualizaProductoSubCategoria($tabla, $porcentaje, $marca);
+            
+                            if($respuesta == "ok"){
+            
+                                echo'<script>
+            
+                                    swal({
+                                          type: "success",
+                                          title: "El precio ha sido editado correctamente '.$marca.' ",
+                                          showConfirmButton: true,
+                                          confirmButtonText: "Cerrar"
+                                          }).then((result) => {
+                                                    if (result.value) {
+            
+                                                    window.location = "productos";
+            
+                                                    }
+                                                })
+            
+                                    </script>';
+            
+                            }
+            
+            
+                        }
+                    }
                 
+            
+    
+                    
+    
+    
         
 
          
-        
+        }
+    

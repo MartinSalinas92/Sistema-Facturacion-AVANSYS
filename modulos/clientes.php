@@ -6,7 +6,6 @@
     <section class="content-header">
       <h1>
         Clientes
-      
       </h1>
       <ol class="breadcrumb">
         <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -164,7 +163,7 @@
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-user-o" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="nuevoApellido" placeholder="Ingresar Apellido">
+                <input type="text" class="form-control input-lg" name="nuevoApellido" placeholder="Ingresar Apellido" required>
             </div>
           </div> 
         <!--ENTRADA PARA EL DNI -->
@@ -178,28 +177,28 @@
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="nuevaLocalidad" placeholder="Ingresar la Localidad" required>
+                <input type="text" class="form-control input-lg" name="nuevaLocalidad" placeholder="Formosa Capital" required>
             </div>
           </div> 
         <!--ENTRADA PARA LA DIRECCION -->
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar la direccion " required>
+                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="b illia2 mz49 " required>
             </div>
           </div> 
         <!--ENTRADA PARA LA calle -->
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-road" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="nuevaCalle" placeholder="Ingresar las calles">
+                <input type="text" class="form-control input-lg" name="nuevaCalle" placeholder="arenales y mouchard">
             </div>
           </div> 
         <!--ENTRADA PARA EL NUMERO DE CALLE-->
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-street-view" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="numerodeCalle"  placeholder="Ingresar numero de calle">
+                <input type="text" class="form-control input-lg" name="numerodeCalle" >
             </div>
           </div> 
         
@@ -215,7 +214,7 @@
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-contao""> </i> </span>
-                <input type="text" class="form-control input-lg" name="nuevoDepartamento" placeholder="ingresar numero de departamento">
+                <input type="text" class="form-control input-lg" name="nuevoDepartamento">
             </div>
           </div> 
         
@@ -285,7 +284,7 @@
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-user-o" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" id="editarApellido" name="editarApellido" value="" >
+                <input type="text" class="form-control input-lg" id="editarApellido" name="editarApellido" value="" required>
             </div>
           </div> 
         <!--ENTRADA PARA EL DNI -->

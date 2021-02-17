@@ -2,12 +2,11 @@
 
 class ControladorCompra{
 
-
     static public function ctrCrearCompra(){
         /*=============================================
 	CREAR VENTAS
     =============================================*/
-        if(isset($_POST["nuevoTotalCompra"])){
+        if(isset($_POST["nuevaVenta"])){
 
                
                $tabla="detalle_compra";
@@ -16,22 +15,24 @@ class ControladorCompra{
 			ACTUALIZAR LAS COMPRAS DEL CLIENTE Y REDUCIR EL STOCK Y AUMENTAR LAS VENTAS DE LOS PRODUCTOS
             =============================================*/
             
-            $listarProductos= json_decode($_POST['listarProductosCompra'], true);
+            $listarProductos= json_decode($_POST['listarProductos'], true);
 
 
 
                $datos=array(
                     'usuario_id'=>$_POST['idVendedor'],
                     'proveedor_id'=>$_POST['idProveedor'],
+                    'impuesto'=>$_POST['nuevoImpuestoVenta'],
+                    'codigo_factura'=>$_POST['nuevaVenta'],
                    'tipo_factura'=>$_POST['idtipo_factura'],
                    'tipo_pago'=>$_POST['nuevoMetodoPago'],
-                   'total_general'=>$_POST['nuevoTotalCompra']
+                   'total_general'=>$_POST['nuevoTotalVenta'],
                    
                    
                );
 
                $datos2=array(
-                   'producto_id'=> $_POST['listarProductosCompra']
+                   'producto_id'=> $_POST['listarProductos'],
                );
 
                $respuesta=ModeloCompras::mdlGuardarCompras($datos,$datos2,$tabla);
@@ -57,7 +58,7 @@ class ControladorCompra{
         }else{
             echo '<script>
             
-            console.log("'.$respuesta[0].'");  
+            console.log("'.$respuesta.'");  
 
            
                          
@@ -88,17 +89,10 @@ class ControladorCompra{
             return $respuesta;
 
         }
-        
 
         static public function ctrMostrarComprasss($fechaInicial,$fechaFinal,$item,$valor){
             $tabla="compras";
             $respuesta=ModeloCompras::mdlMostrarComprasss($fechaInicial,$fechaFinal,$tabla,$item,$valor);
-            return $respuesta;
-        }
-
-        static public function ctrmostrarCompraMes($fechaInicial,$fechaFinal,$item,$valor){
-            $tabla="compras";
-            $respuesta=ModeloCompras::mdlMostrarCompraspormes($fechaInicial,$fechaFinal,$item,$valor,$tabla);
             return $respuesta;
         }
 
@@ -115,23 +109,6 @@ class ControladorCompra{
             return $respuesta1;
 
         }
-        static public function ctrMostrardetallesCantidadProductos($item){
-            $tabla="detalle_compra";;
-            $respuesta=ModeloCompras::mdlmostrarProductosMascomprados($item,$tabla);
-            return $respuesta;
-        }
-        static public function ctrSumaTotalCompras($item){
-            $tabla="detalle_compra";
-            $respuesta=ModeloCompras::mdlSumaCantidadCompras($item,$tabla);
-            return $respuesta;
-        }
-
-        static public function ctrMostrarProveedoresmasFrecuentes(){
-            $tabla="compras";
-            $respuesta=ModeloCompras::mostrarproveedoresconmascompras($tabla);
-            return $respuesta;
-        }
-
 
     }
 

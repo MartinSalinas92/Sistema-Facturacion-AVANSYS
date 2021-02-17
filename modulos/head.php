@@ -9,7 +9,7 @@
     <!--logo mini-->
     <span class='logo-mini'>
 
-        <img src="vistas/img/plantilla/maquina-expendedora (1).png"  class="img-responsive" style="padding:10px">
+        <img src="vistas/img/plantilla/Hebreos.jpg"  class="img-responsive" style="padding:2px">
 
     </span>
 

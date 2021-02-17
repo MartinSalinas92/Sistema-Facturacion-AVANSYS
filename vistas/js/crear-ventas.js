@@ -4,7 +4,7 @@ CREAR-VENTAS
 =============================================*/
 	
 
-function editp(id,descripcion,codigo,stock,precio_venta){
+function editp(id,nombre,descripcion,codigo,stock,precio_venta){
    // console.log('datos');		
     var idProducto= id;
     $('#btnbtn'+id).hide();
@@ -85,7 +85,6 @@ function editp(id,descripcion,codigo,stock,precio_venta){
          
    '<div class="col-xs-3" style="padding-left:0px"  >'+
                
-   
          '<label> Interes </label>'+
       '<div class="form-group">'+
             '<div class="input-group">'+ 
@@ -381,8 +380,7 @@ $(".formularioVenta").on("change", "input#nuevoValorEfectivo", function(){
 
 	nuevoCambioEfectivo.val(cambio);
 
-});
-
+})
 
 /*=============================================
 LISTAR TODOS LOS PRODUCTOS
@@ -480,7 +478,7 @@ function descuentosPrecios(id){
    var precioReal = parseFloat($('#ProductoPrecioVenta'+id).attr('precioRealFinal'));
 
    var descuento = parseInt($("#ProductoDescuento"+id).val());
-   //var precioProducto= parseInt($('#ProductoPrecioVenta'+id).val());
+   var precioProducto= parseInt($('#ProductoPrecioVenta'+id).val());
    var preciofinal= precioReal - descuento;
    console.log(precioReal);
    console.log(preciofinal);

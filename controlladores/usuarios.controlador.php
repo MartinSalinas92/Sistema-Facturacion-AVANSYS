@@ -20,7 +20,7 @@ class  ControladorUsuarios{
            $respuesta=ModelosUsuarios::MdlMostrarUsuarios($tabla,$item,$valor);
            //var_dump($respuesta['usuario']);//
            if($respuesta["usuario"]==$_POST["ingUsuario"]){
-            if(password_verify($_POST["ingPassword"],$respuesta["password"])){
+           // if(password_verify($_POST["ingPassword"],$respuesta["password"])){
 
                    if($respuesta['estado']==1){
 
@@ -72,7 +72,7 @@ class  ControladorUsuarios{
          }
      }
    }
-}
+
 
 
  /*--======================================================
@@ -147,7 +147,6 @@ class  ControladorUsuarios{
                                 "perfil"=>$_POST["nuevoPerfil"],
                                 "foto"=>$ruta );
                         $respuesta=ModelosUsuarios::mdlGuardarUsuarios($tabla,$datos);
-                        
 
                         if($respuesta=="ok"){
                             echo '<script> 

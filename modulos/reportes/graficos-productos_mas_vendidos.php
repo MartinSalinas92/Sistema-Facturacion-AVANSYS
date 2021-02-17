@@ -1,22 +1,7 @@
 <?php 
 
-if(!empty($_GET['fechaInicialporProductos'])){
-  $fechaInicial=$_GET['fechaInicialporProductos'];
-  $fechaFinal=$_GET['fechaFinalporProductos'];
-  $productos=ControladorVenta::crtMostrarCantidadProductosPorMes($fechaInicial,$fechaFinal);
-
-  $colores = array("green","yellow","aqua","purple","blue","cyan","magenta","orange","gold");
 
 
-  $item=['id_detalle_factura'];
-  $totalVentas= ControladorVenta::ctrSumaTotalVentas($item);
-  
-
-
-
-}else{
-
-  
 $item=null;
 $productos=ControladorVenta::ctrMostrardetallesCantidadProductos($item);
 
@@ -29,14 +14,13 @@ $item='id_detalle_factura';
 
 $totalVentas = ControladorVenta::ctrSumaTotalVentas($item);
 
-}
 
 
 
 ?>
           <div class="box box-default">
             <div class="box-header with-border">
-              <h3 class="box-title">Productos Mas Vendidos del Mes</h3>
+              <h3 class="box-title">Productos Mas Vendidos</h3>
 
             <!-- /.box-header -->
             <div class="box-body">
@@ -156,10 +140,3 @@ for($i=0; $i < count($productos,5) ; $i++){
     
     
     </script>
-
-
-
-
-
-
-

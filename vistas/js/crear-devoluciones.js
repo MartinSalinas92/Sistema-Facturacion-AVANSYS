@@ -125,6 +125,8 @@ $('.btnImprimirDevolucion').click(function(){
 
     window.location="index.php?ruta=detalledevolucioness&idDevolucion="+idDevolucion;
 
+   
+
 });
 
 

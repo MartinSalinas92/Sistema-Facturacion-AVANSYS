@@ -5,7 +5,6 @@ require_once "../modelos/usuarios.modelo.php";
 class ajaxusuarios{
     /*EDITAR USUARIOS*/
 
-    
     public $idUsuario;
 
     public function ajaxEditarUsuarios(){

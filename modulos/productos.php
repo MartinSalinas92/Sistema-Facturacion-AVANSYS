@@ -7,7 +7,6 @@
     <section class="content-header">
       <h1>
         Productos
-
       
       </h1>
       <ol class="breadcrumb">
@@ -43,14 +42,15 @@
               <tr>
                 
                 <th>Imagen</th> 
-                <th>descripcion</th>  
+                <th>Nombre</th> 
+                <th>descripcion</th> 
+                <th>codigo</th> 
                 <th>precio_venta</th> 
                 <th>precio_compra</th>
                 <th>stock_min</th>
                 <th>stock</th>
                 <th>Marca</th>
                 <th>Categoria</th>
-                <th>Subategoria</th>
                 <th>Estado</th>
                 <th>Acciones</th>
               
@@ -83,8 +83,9 @@
               echo ' <img src="vistas/img/productos/anonymous.png" class="img-fluid img-thumbnail" width=30px> </td>';
             }
             echo '
-         
+                <td>'.$values['nombre'].'</td>
                 <td>'.$values['descripcion'].'</td>
+                <td>'.$values['codigo'].'</td>
                 <td>'.number_format($values['precio_venta'],2).'</td>
                 <td>'.number_format($values['precio_compra'],2).'</td>';
 
@@ -105,8 +106,7 @@
 
                 
                 <td>'.$values['nombre_marca'].'</td>
-                <td>'.$values['nombre_categoria'].'</td>
-                <td>'.$values['nombre_subcategoria'].'</td>';
+                <td>'.$values['nombre_categoria'].'</td>';
 
                 
 
@@ -187,7 +187,13 @@
       <div class="modal-body">
         <div class="box-body">
         
-       
+        <!--ENTRADA PARA EL NOMBRE DEL PRODUCTO-->
+          <div class="form-group"> 
+            <div class="input-group"> 
+              <span class="input-group-addon"><i class="fa fa-product-hunt"> </i> </span>
+                <input type="text" class="form-control input-lg" name="nuevoNombreProducto" placeholder="Ingresar Nombre" id="nuevoUsuario"required>
+            </div>
+          </div> 
         
         <!--ENTRADA PARA LA DESCRIPCION DEL PRODUCTO-->
           <div class="form-group"> 
@@ -331,32 +337,6 @@
                 </select>
             </div>
           </div> 
-        <div class="form-group"> 
-            <div class="input-group"> 
-              <span class="input-group-addon"><i class="fa fa-contao"> </i> </span>
-                <select class="form-control input-lg" id="nuevoSubCategoria" name="nuevoSubCategoria">
-                <option value="">Seleccionar Subcategoria</option>
-                  
-                  
-                <?php 
-                $item= null;
-                $valor= null;
-
-                $respuesta=SubcategoriaControlador::mostrarSubCategorias($item,$valor);
-                
-                foreach($respuesta as $values){
-                  
-
-                  echo'<option value='.$values['id_subcategoria'].'>'.$values['nombre'].'</option>';
-                
-              }
-                
-                
-                ?>
-         
-                </select>
-            </div>
-          </div> 
            
 
           
@@ -424,13 +404,20 @@
       <div class="modal-body">
         <div class="box-body">
         
-      
+        <!--ENTRADA PARA EL NOMBRE DEL PRODUCTO-->
+          <div class="form-group"> 
+            <div class="input-group"> 
+              <span class="input-group-addon"><i class="fa fa-product-hunt"> </i> </span>
+              
+              <input type="hidden"  id="idProductos" name="idProductos" value="" required>
+                <input type="text" class="form-control input-lg" name="EditarNombreProducto"  id="EditarNombreProducto"required>
+            </div>
+          </div> 
         
         <!--ENTRADA PARA LA DESCRIPCION DEL PRODUCTO-->
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-product-hunt"> </i> </span>
-                <input type="hidden"  id="idProductos" name="idProductos" value="" required>
                 <input type="text" class="form-control input-lg" id="EditarDescripcion" name="EditarDescripcion" required>
             </div>
           </div>
@@ -561,32 +548,6 @@
                 </select>
             </div>
           </div> 
-          <div class="form-group"> 
-            <div class="input-group"> 
-              <span class="input-group-addon"><i class="fa fa-contao"> </i> </span>
-                <select class="form-control input-lg" id="editarSubCategoria" name="editarSubCategoria">
-                <option value="">Seleccionar Subcategoria</option>
-                  
-                  
-                <?php 
-                $item= null;
-                $valor= null;
-
-                $respuesta=SubcategoriaControlador::mostrarSubCategorias($item,$valor);
-                
-                foreach($respuesta as $values){
-                  
-
-                  echo'<option value='.$values['id_subcategoria'].'>'.$values['nombre'].'</option>';
-                
-              }
-                
-                
-                ?>
-         
-                </select>
-            </div>
-          </div> 
 
           
             <!--ENTRADA PARA SUBIR FOTOS-->
@@ -632,7 +593,6 @@
 
 </div>
 </div>
-
     
  
 

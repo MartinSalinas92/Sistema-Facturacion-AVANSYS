@@ -8,23 +8,14 @@ class ControladorProveedores{
 
   static public function ctrCrearProveedores(){
       if(isset($_POST['nuevaRazonSocial'])){
-             /*VALIDAMOS LOS CAMPOS*/
-
-             if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaRazonSocial"])&&
-             preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST['nuevoNombreProveedor'])&&
-             preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST['nuevoApellidoProveedor'])
-             ){
-
-            $tabla= "personas";
+            
             $tabla1="proveedores";
 
             $datos=array(
                 'razon_social'=>$_POST['nuevaRazonSocial'],
-                'nombre'=>$_POST['nuevoNombreProveedor'],
-                'apellido'=>$_POST['nuevoApellidoProveedor'],
-                'dni'=>$_POST['nuevodni'],
+             
             );
-        $respuesta=ModelosProveedores::mdlCrearProveedor($tabla,$tabla1,$datos);
+        $respuesta=ModelosProveedores::mdlCrearProveedor($tabla1,$datos);
 
         if($respuesta== 'ok'){
             echo'
@@ -71,7 +62,7 @@ class ControladorProveedores{
       }
   }
 
-}
+
   static public function ctrCrearProveedoresVentas(){
       if(isset($_POST['nuevaRazonSocial'])){
              /*VALIDAMOS LOS CAMPOS*/
@@ -152,21 +143,16 @@ static public function crtMostrarProveedores($item,$valor){
         EDITAR PROVEEDORES
   =========================================================--  */
   static public function ctrEditarProveedores(){
-    if(isset($_POST["editarNombre"])){
+    if(isset($_POST["editarRazonSocial"])){
 
-      if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarRazonSocial"])&&
-      preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST['editarNombre'])&&
-      preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST['editarApellido'])){
-        $tabla1="personas";
+       
         $tabla="proveedores";
         $datos=array(
-            "id_persona"=>$_POST['idPersona'],
-            "razon_social"=>$_POST['editarRazonSocial'],
-            "nombre"=>$_POST['editarNombre'],
-            "apellido"=>$_POST['editarApellido'],
-            "dni"=>$_POST['editarDNI']
+            "id_proveedor"=>$_POST['idProveedores'],
+            "razon_social"=>$_POST['editarRazonSocial']
+           
         );
-        $respuesta=ModelosProveedores::mdlEditarProveedores($tabla,$tabla1,$datos);
+        $respuesta=ModelosProveedores::mdlEditarProveedores($tabla,$datos);
 
         if($respuesta == "ok"){
             echo'<script>
@@ -208,7 +194,7 @@ static public function crtMostrarProveedores($item,$valor){
         }
 
 
-      }
+      
     }
   }
     

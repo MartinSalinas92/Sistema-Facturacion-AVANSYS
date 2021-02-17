@@ -1,6 +1,5 @@
 <?php
 
-
 class ControladorVenta{
 
     static public function ctrMostrarVentas($item,$valor,$fechaInicial,$fechaFinal){
@@ -10,13 +9,6 @@ class ControladorVenta{
         return $respuesta;
 
         
-    }
-    static public function ctrMostrarVentasReportess($item,$valor,$fechaInicial,$fechaFinal){
-        $tabla="factura";
-
-        $respuesta=ModeloVentas::MdlMostrarVentasReportess($item,$valor,$tabla,$fechaInicial,$fechaFinal);
-        return $respuesta;
-
         
     }
     static public function ctrMostrarVentasss($item,$valor,$fechaInicial,$fechaFinal){
@@ -73,11 +65,8 @@ class ControladorVenta{
             =============================================*/
             
             $listarProductos= json_decode($_POST['listarProductos'], true);
-            
 
-            
 
-            
             
 
                $datos=array(
@@ -86,8 +75,9 @@ class ControladorVenta{
                    'tipo_pago'=>$_POST['nuevoMetodoPago'],
                    'total_general'=>$_POST['nuevoTotalVenta'],
                    'impuesto'=>$_POST['nuevoImpuestoVenta'],
-                   'usuario_id'=>$_POST['idVendedor'],
                    'cliente_id'=>$_POST['idCliente'],
+                   'usuario_id'=>$_POST['idVendedor'],
+
                );
 
                $datos2=array(
@@ -159,6 +149,15 @@ class ControladorVenta{
         
 
     }
+
+      /*=============================================
+	SUMA TOTAL PRECIOS
+    =============================================*/
+    static public function totalPrecios($item){
+        $tabla="factura";
+        $respuesta=ModeloVentas::mdlTotalPrecios($item,$tabla);
+        return $respuesta;
+    }
     
         /*=============================================
 	MOSTRAR VENTAS DE VENDEDORES CON MAS VENTAS GENERADAS
@@ -181,25 +180,7 @@ class ControladorVenta{
 
     }
 
-        /*=============================================
-	TOTAL DE VENTAS
-    =============================================*/
-
-    static public function totalPrecios($item){
-        $tabla="factura";
-        $respuesta=ModeloVentas::mdlmostrarTotalPrecios($item,$tabla);
-        return $respuesta;
-    }
-
-
-    static public function crtMostrarCantidadProductosPorMes($fechaInicial,$fechaFinal){
-        $tabla="factura";
-        $respuesta=ModeloVentas::mdlMostrarCantidadProductosPorMes($fechaInicial,$fechaFinal,$tabla);
-        return $respuesta;
-    }
-
 
 }
-
 
 

@@ -67,8 +67,7 @@ static public  function mdlMostrarClientes($item,$valor,$tabla){
   =========================================================--  */
     if($item != null){
 
-        $stmt=Conexion::conectar()->prepare("SELECT
-         clientes.`id_cliente`,
+        $stmt=Conexion::conectar()->prepare("SELECT 
         personas.`id_persona`,
         direccion.`id_direccion`,
         personas.`nombre`,

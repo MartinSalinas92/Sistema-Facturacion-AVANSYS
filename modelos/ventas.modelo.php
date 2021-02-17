@@ -5,7 +5,6 @@ require_once 'conexion.php';
 
 class ModeloVentas{
 
-    
     /*=============================================
 	MOSTRAR VENTAS
 	=============================================*/
@@ -18,14 +17,14 @@ class ModeloVentas{
             $consulta->execute();
             return $consulta->fetch();
 
-        }else if($fechaInicial == null){
+        }else{
+            if($fechaInicial == null){
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id_factura asc");
+                $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id_factura asc");
     
                 $stmt -> execute();
     
                 return $stmt -> fetchAll();	
-                
     
     
             }else if($fechaInicial == $fechaFinal){
@@ -45,54 +44,10 @@ class ModeloVentas{
             }
 
         }
-    
-
-
-    static public function MdlMostrarVentasReportess($item,$valor,$tabla,$fechaInicial,$fechaFinal){
-        if($item != null){
-            $consulta= Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item= $valor  ORDER BY id_factura desc");
-            $consulta->bindParam(":".$item, $valor, PDO::PARAM_STR);
-
-            $consulta->execute();
-            return $consulta->fetch();
-
-        }else if($fechaInicial == null){
-
-            $stmt = Conexion::conectar()->prepare("SELECT SUM(total_general) AS Total,
-            DATE(fecha) AS Mes
-            FROM factura
-            GROUP BY Mes;");
-    
-                $stmt -> execute();
-    
-                return $stmt -> fetchAll();	
-                
-    
-    
-            }else if($fechaInicial == $fechaFinal){
-    
-                $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha like '%$fechaFinal%'");
-    
-                $stmt -> bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
-    
-                $stmt -> execute();
-    
-                return $stmt -> fetchAll();
-    
-            }else{
-                $stmt= Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' and '$fechaFinal'");
-                $stmt->execute();
-                 return $stmt->fetchAll();
-            }
-
-
     }
-    
 
 
 
-
-    
 
     static public function mdlMostrarVentasPorfecha($item,$valor,$tabla,$fechaInicial,$fechaFinal){
        /* if($item != null){
@@ -131,7 +86,6 @@ class ModeloVentas{
 
     }
     
-
 
     
     
@@ -186,7 +140,6 @@ class ModeloVentas{
  /*=============================================
 	MOSTRAR LOS DETALLES DE FACTURA DE LOS PRODUCTOS MAS VENDIDOS
     =============================================*/
-
     
     static public function MdlMostrasVentasMasvendidas($tabla,$item){
         if($item==null){
@@ -223,13 +176,14 @@ class ModeloVentas{
 
 
 
+
  /*=============================================
 	GUARDAR VENTAS
 	=============================================*/
 
 static public function mdlGuardarVentas($datos,$datos2,$tabla){
     $date = date('Y-m-d');
-        $stmt= Conexion::conectar()->prepare("INSERT INTO factura(fecha,tipo_factura,codigo_factura,tipo_pago,total_general,usuario_id,cliente_id,impuesto) VALUES ('$date',:tipo_factura,:codigo_factura,:tipo_pago,:total_general,:usuario_id,:cliente_id, :impuesto)");
+        $stmt= Conexion::conectar()->prepare("INSERT INTO factura(fecha,tipo_factura,codigo_factura,tipo_pago,total_general,usuario_id,cliente_id,impuesto) VALUES ('$date',:tipo_factura,:codigo_factura,:tipo_pago,:total_general,:usuario_id,:cliente_id,:impuesto)");
         $stmt->bindParam(":tipo_factura",$datos['tipo_factura'],PDO::PARAM_STR);
         $stmt->bindParam(":codigo_factura",$datos['codigo_factura'],PDO::PARAM_STR);
         $stmt->bindParam(":tipo_pago",$datos['tipo_pago'],PDO::PARAM_STR);
@@ -268,21 +222,8 @@ static public function mdlGuardarVentas($datos,$datos2,$tabla){
             
             return $st='ok';            
                     
-                    //while($num_elemento< count($datos2['producto_id'])){
-                       
-                    /*
-                    $num = 0;
-                    while($num < $_POST['variable']){
-                        $stmt1=Conexion::conectar()->prepare("INSERT INTO $tabla1(razon_social,persona_id) VALUES (:razon_social,:persona_id)");
-                        $stmt1->bindParam(":razon_social",$datos['razon_social'],PDO::PARAM_STR);
-                        $stmt1->bindParam(":persona_id",$resultado,PDO::PARAM_INT);
-                        if($stmt1->execute()){
-                                return 'ok';
-                        }
-                    }*/
-
+                    
 }
-
 }
 
 	/*=============================================
@@ -374,98 +315,13 @@ static public function mdlGuardarVentas($datos,$datos2,$tabla){
         return $consulta-> fetchAll();
 
     }
-
-    static public function mdlmostrarTotalPrecios($item,$tabla){
-        $consulta=Conexion::conectar()->prepare("SELECT
-        SUM(total_general) AS total
-        FROM $tabla WHERE fecha >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH);");
-
+      /*=============================================
+	SUMA TOTAL PRECIOS
+    =============================================*/
+    static public function mdlTotalPrecios($item,$tabla){
+        $consulta=Conexion::conectar()->prepare("SELECT SUM(total_general) as total from $tabla 
+        where fecha >=DATE_SUB(CURDATE(),INTERVAL 1 MONTH);");
         $consulta->execute();
         return $consulta->fetch();
     }
-
-    static public function ActivarFactura($tabla,$item1,$estado,$item2,$id_user){
-        $consulta=Conexion::conectar()->prepare("UPDATE $tabla SET estado = :estado WHERE id_factura = :id_factura");
-        $consulta->bindParam(":estado",$estado,PDO::PARAM_STR);
-        $consulta->bindParam(":id_factura",$id_user,PDO::PARAM_INT);
-
-        if($consulta->execute()){
-        return 'ok';
-    }else{
-            return 'error';
-        }
-    }
-    
-
-    static public function mostrarDevolucionVentas($item,$valor){
-
-        $consulta=Conexion::conectar()->prepare("SELECT 
-        factura.`id_factura` as id_factura,
-        factura.`codigo_factura` as cod_factura,
-        clientes.`persona_id`,
-        personas.`nombre`as nombre,
-        personas.`apellido` as apellido,
-        productos.`descripcion` as descripcion
-        FROM factura
-        INNER JOIN clientes ON factura.`cliente_id`=clientes.`id_cliente`
-        INNER JOIN personas ON clientes.`persona_id`=personas.`id_persona`
-        INNER JOIN detalle_factura ON detalle_factura.`factura_id`=factura.`id_factura`
-        INNER JOIN productos ON detalle_factura.`producto_id`=productos.`id_producto`
-        WHERE $item=$valor;");
-        $consulta->bindParam(":".$item,$valor,PDO::PARAM_STR);
-        $consulta->execute();
-        return $consulta->fetch();
-  
 }
-static public function mostrarDevolucionVentasmodal($valor){
-
-    $consulta=Conexion::conectar()->prepare("SELECT 
-    factura.`id_factura` as id_factura,
-    factura.`codigo_factura` as cod_factura,
-    clientes.`persona_id`,
-    personas.`nombre`as nombre,
-    personas.`apellido` as apellido,
-    productos.`descripcion` as descripcion
-    FROM factura
-    INNER JOIN clientes ON factura.`cliente_id`=clientes.`id_cliente`
-    INNER JOIN personas ON clientes.`persona_id`=personas.`id_persona`
-    INNER JOIN detalle_factura ON detalle_factura.`factura_id`=factura.`id_factura`
-    INNER JOIN productos ON detalle_factura.`producto_id`=productos.`id_producto`
-    WHERE id_factura=$valor;");
-    $consulta->bindParam(":".$item,$valor,PDO::PARAM_STR);
-    $consulta->execute();
-    return $consulta->fetchAll();
-
-}
-
-static public function mdlMostrarCantidadProductosPorMes($fechaInicial,$fechaFinal,$tabla){ 
-    if($fechaInicial == $fechaFinal){
-
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha like '%$fechaFinal%'");
-
-    $stmt -> bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
-
-    $stmt -> execute();
-
-    return $stmt -> fetchAll();
-
-}else{
-    $stmt= Conexion::conectar()->prepare(" SELECT 
- SUM(detalle_factura.`cantidad`) AS total_cantidad,
- factura.`fecha`,
- detalle_factura.`factura_id`,
- productos.`descripcion`
-  FROM detalle_factura
-  INNER JOIN productos ON detalle_factura.`producto_id`= productos.`id_producto` 
-  INNER JOIN factura ON detalle_factura.`factura_id`=factura.`id_factura`
-  WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal';
- ;");
-    $stmt->execute();
-     return $stmt->fetchAll();
-}
-
-    
-}
-    
-}
-

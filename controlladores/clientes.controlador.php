@@ -6,6 +6,7 @@ class ControladorClientes{
     static function ctrCrearClientes(){
         if(isset($_POST['nuevoNombre'])){
             
+
                 $tabla="clientes";
                 $tabla1='personas';
                 $tabla2="direccion";
@@ -20,7 +21,7 @@ class ControladorClientes{
                     'nombre_calle'=>$_POST['nuevaCalle'],
                     'numero_calle'=>$_POST['numerodeCalle'],
                     'numero_casa'=>$_POST['numerodeCasa'],
-                    'piso_departamento'=>$_POST['nuevoDepartamento']
+                    'piso_departamento'=>$_POST['nuevoDepartamento'],
                 );
                 var_dump($datos);
 
@@ -65,9 +66,7 @@ class ControladorClientes{
                 </script>';
         }
 
-            
-        }
-        
+            }
     }
     static function ctrCrearClientesVentas(){
         if(isset($_POST['nuevoNombre'])){
@@ -168,10 +167,10 @@ class ControladorClientes{
 
             $respuesta=ModeloClientes::mdlEditarClientes($tabla1,$tabla2,$datos);
             
-    if($respuesta == 'ok'){
+    if($respuesta== 'ok'){
         echo'
         <script>
-     
+        console.log('.$respuesta.');
         swal({
             type: "success",
             title: "¡El cliente ha sido modificado correctamente!",
@@ -208,9 +207,9 @@ class ControladorClientes{
             </script>';
     }
 
-        
+        }
     }
     
 }
 
-  }
+  

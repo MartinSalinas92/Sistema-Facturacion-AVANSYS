@@ -29,14 +29,15 @@
           <thead>
               <tr> 
                 
-               
+              <th>Producto</th> 
                 <th>Descripcion</th>
                 <th>Cantidad</th> 
-                <th>Precio</th>   
+                <th>Precio</th> 
+                <th>Descuento</th> 
+                <th>Interes</th>  
                 <th>Subtotal</th>
              
                 
-              
               
               
               
@@ -45,11 +46,8 @@
             
             </thead>
             <tbody> 
-            
-            
 
             <?php 
-            
             
             if(isset($_GET['idCompra'])){
               $valor=$_GET['idCompra'];
@@ -65,11 +63,12 @@
 
               echo '
             <tr>
-                
-  
+                <td>'.$Mostrarproductos['nombre'].'</td>
                 <td>'.$Mostrarproductos['descripcion'].'</td>
                 <td>'.$res['cantidad'].'</td>
                 <td>'.$res['precio'].'</td>
+                <td>'.$res['descuento'].'</td>
+                <td>'.$res['interes'].'</td>
                 <td>'.number_format($res['subtotal'],2).'</td>
                 
                 </tr>';
@@ -84,8 +83,9 @@
                // var_dump($respuesta);
 
                 $totalGeneral=$respuesta['total_general'];
-                
+                $impuesto=$respuesta['impuesto'];
 
+                $impuestoIva=$impuesto*$totalGeneral/100;
 
                 echo'
                 
@@ -97,7 +97,7 @@
               <thead>
 
                 <tr>
-                  
+                  <th>Impuesto :'  .number_format($impuesto).' %</th>
                   <th>Total</th>      
                 </tr>
 
@@ -106,7 +106,9 @@
               <tbody>
               
                 <tr>
-                
+                  
+                  <td style="width: 50%"> 
+                  '.$impuestoIva.'
                   </td>
                   <td style="width: 50%"> 
                   '.$totalGeneral.'

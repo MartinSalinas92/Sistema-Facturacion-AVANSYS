@@ -34,10 +34,8 @@
               <tr>
                 <th>id </th> 
                 <th>Razon_social</th> 
-                <th>Nombre</th> 
-                <th>Apellido</th> 
-                <th>DNI </th> 
-                <th>estado </th> 
+                <th>estado</th> 
+                
               
                 <th>Acciones </th> 
               
@@ -62,11 +60,9 @@
                 echo '
                     <tr>
                     
-                      <td>'.$value['id_persona'].' </td> 
-                      <td>'.$value['razon_social'].'</td>
-                      <td>'.$value['nombre'].'</td>
-                      <td>'.$value['apellido'].'</td>
-                      <td>'.$value['dni'].'</td>';
+                      <td>'.$value['id_proveedor'].' </td> 
+                      <td>'.$value['razon_social'].'</td>';
+                   
                       
 
                       if($value['estado'] !=0){
@@ -79,10 +75,9 @@
                      
                      echo '
 
-                  <td>
-                
+                  <td> 
                     <div class="btn-group">
-                    <button class="btn btn-warning btnEditarProveedores" idProveedores="'.$value['id_persona'].'" data-toggle="modal" data-target="#EditarProveedor"><i class="fa fa-pencil"></i> </button>';
+                    <button class="btn btn-warning btnEditarProveedores" idProveedores="'.$value['id_proveedor'].'" data-toggle="modal" data-target="#EditarProveedor"><i class="fa fa-pencil"></i> </button>';
 
                     if($value['estado'] !=0){
                       echo ' <button class="btn btn-success btnEliminarProveedor" idProveedor="'.$value['id_proveedor'].'"><i class="fa fa-check" estadoProveedor="1"></i> </button>
@@ -167,29 +162,6 @@
               <span class="input-group-addon"><i class="fa fa-user"> </i> </span>
                 <input type="text" class="form-control input-lg" name="nuevaRazonSocial"  required>
             </div>
-          </div> 
-        <!--ENTRADA PARA EL USUARIO-->
-          <div class="form-group"> 
-            <div class="input-group"> 
-              <span class="input-group-addon"><i class="fa fa-key"> </i> </span>
-                <input type="text" class="form-control input-lg" name="nuevoNombreProveedor" placeholder="Ingresar Nombre" id="nuevoUsuario"required>
-            </div>
-          </div> 
-        
-        <!--ENTRADA PARA EL Password-->
-          <div class="form-group"> 
-            <div class="input-group"> 
-              <span class="input-group-addon"><i class="fa fa-lock"> </i> </span>
-                <input type="text" class="form-control input-lg" name="nuevoApellidoProveedor" required>
-            </div>
-          </div>
-         
-        <!--ENTRADA PARA EL Password-->
-          <div class="form-group"> 
-            <div class="input-group"> 
-              <span class="input-group-addon"><i class="fa fa-lock"> </i> </span>
-                <input type="text" class="form-control input-lg" name="nuevodni" required>
-            </div>
           </div>
          
           
@@ -246,62 +218,22 @@
   <!--======================================================
         CUERPO DEL MODAL
   =========================================================-->
-
+  
       <div class="modal-body">
         <div class="box-body">
         <!--ENTRADA PARA la razon social-->
           <div class="form-group"> 
             <div class="input-group"> 
-              <span class="input-group-addon"><i class="fa fa-contao""> </i> </span>
+              <span class="input-group-addon"><i class="fa fa-contao"> </i> </span>
 
-              <input type="hidden"  id="idPersona" name="idPersona" value="" required>
+              <input type="hidden"  id="idProveedores" name="idProveedores" value="" required>
                 
                 <input type="text" class="form-control input-lg" id="editarRazonSocial" name="editarRazonSocial" value="" required>
             
                 
             </div>
           </div> 
-        
-        <!--ENTRADA PARA EL NOMBRE-->
-          <div class="form-group"> 
-            <div class="input-group"> 
-              <span class="input-group-addon"><i class="fa fa-contao""> </i> </span>
-
-             
-                
-                <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
-            
-                
-            </div>
-          </div> 
-          
-        
-        <!--ENTRADA PARA EL APELLIDO-->
-          <div class="form-group"> 
-            <div class="input-group"> 
-              <span class="input-group-addon"><i class="fa fa-contao""> </i> </span>
-
-             
-                
-                <input type="text" class="form-control input-lg" id="editarApellido" name="editarApellido" value="" required>
-            
-                
-            </div>
-          </div> 
-          
-        
-        <!--ENTRADA PARA EL NOMBRE-->
-          <div class="form-group"> 
-            <div class="input-group"> 
-              <span class="input-group-addon"><i class="fa fa-contao""> </i> </span>
-
-             
-                
-                <input type="text" class="form-control input-lg" id="editarDNI" name="editarDNI" value="" required>
-            
-                
-            </div>
-          </div> 
+       
           
         
           <div class="modal-footer">

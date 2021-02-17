@@ -21,16 +21,14 @@ class ajaxProducto{
         $valor=$this->idProducto;
         $respuesta= ControladorProductos::ctrMostrarProductos($item,$valor);
         echo json_encode($respuesta);
-	
-        
     }
-     public $activarId;
+    public $activarId;
         public $activarProducto;
         public function ajaxActivarProducto(){
             $tabla="productos";
             $item1="estado";
             $estado= $this->activarProducto;
-            $item2="id_producto";
+            $item2='id_producto';
     
             $id_user=$this->activarId;
     
@@ -49,8 +47,6 @@ switch ($_GET['op']) {
         $editar= new ajaxProducto;
         $editar->idProducto=$id;
         $editar->ajaxEditarProductos();
-    
-    break;
     }
 }
 
@@ -68,7 +64,5 @@ function activar($id,$estado){
     $activarProducto-> activarId= $id;
     $activarProducto->ajaxActivarProducto();
 }
-
-
 
 ?>

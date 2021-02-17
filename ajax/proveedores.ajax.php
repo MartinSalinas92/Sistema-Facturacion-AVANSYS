@@ -3,7 +3,6 @@
 require_once '../controlladores/proveedores.controlador.php';
 require_once '../modelos/proveedores.modelo.php';
 
-
 class ajaxProveedores{
      /*=============================================
 	EDITAR PROVEEDORES
@@ -12,7 +11,7 @@ class ajaxProveedores{
     public $idProveedores;
 
  public function ajaxEditarProveedores(){
-        $item="id_persona";
+        $item="id_proveedor";
         $valor=$this->idProveedores;
         $respuesta=ControladorProveedores::crtMostrarProveedores($item,$valor);
         echo json_encode($respuesta);

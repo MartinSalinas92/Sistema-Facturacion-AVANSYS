@@ -21,21 +21,6 @@ class ajaxCompras{
 
     }
 
-    public $activarId;
-    public $activarCompra;
-
-    public function activarCompra(){
-        $tabla="compras";
-        $item1="estado";
-        $estado= $this->activarCompra;
-        $item2="id_compra";
-
-        $id_user=$this->activarId;
-
-        $respuesta=ModeloCompras::ActivarCompra($tabla,$item1,$estado,$item2,$id_user);
-
-    }
-
 }
 
 
@@ -49,22 +34,5 @@ switch($_GET['op']){
             $mostrar->ajaxMostrarDetalles();
         }
 }
-
-switch($_GET['op']){
-    case 'activar':
-        $id=$_GET['id_user'];
-        $estado=$_GET['estado'];
-        activar($id,$estado);
-}
-
-
-function activar($id,$estado){
-    $activarCompra= new ajaxCompras;
-    $activarCompra-> activarId=$id;
-    $activarCompra-> activarCompra=$estado;
-    $activarCompra->activarCompra();
-}
-
-
 
 ?>

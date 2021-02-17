@@ -7,7 +7,6 @@ $(".btnEditarProveedores").click(function(){
     var idProveedores=$(this).attr("idProveedores");
 
     
-    
     var datos= new FormData();
     datos.append("idProveedores",idProveedores);
 
@@ -26,11 +25,9 @@ $(".btnEditarProveedores").click(function(){
             var respuesta = JSON.parse(respuesta);
         console.log(respuesta); 
         
-           $("#idPersona").val(respuesta['id_persona']);
+           $("#idProveedores").val(respuesta['id_proveedor']);
             $("#editarRazonSocial").val(respuesta['razon_social']);
-            $("#editarNombre").val(respuesta.nombre);
-            $("#editarApellido").val(respuesta.apellido);
-            $("#editarDNI").val(respuesta.dni);
+            
            
            }
 
@@ -67,7 +64,6 @@ $(document).on("click", ".btnActivar", function(){
         
 
          }
-
 
 
      })

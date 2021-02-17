@@ -1,14 +1,15 @@
 <?php
 
-
 class ModeloCompras{
 
     static public function mdlGuardarCompras($datos,$datos2,$tabla){
         $date = date('Y-m-d');
-        $stmt= Conexion::conectar()->prepare("INSERT INTO compras(usuario_id,proveedor_id,tipo_factura,tipo_pago,total_general,fecha) VALUES (:usuario_id,:proveedor_id,:tipo_factura,:tipo_pago,:total_general,'$date')");
+        $stmt= Conexion::conectar()->prepare("INSERT INTO compras(usuario_id,proveedor_id,impuesto,codigo_factura,tipo_factura,tipo_pago,total_general,fecha) VALUES (:usuario_id,:proveedor_id,:impuesto,:codigo_factura,:tipo_factura,:tipo_pago,:total_general,'$date')");
 
         $stmt->bindParam(":usuario_id",$datos['usuario_id'],PDO::PARAM_INT);
         $stmt->bindParam(":proveedor_id",$datos['proveedor_id'],PDO::PARAM_INT);
+        $stmt->bindParam(":impuesto",$datos['impuesto'],PDO::PARAM_STR);
+        $stmt->bindParam(":codigo_factura",$datos['codigo_factura'],PDO::PARAM_STR);
         $stmt->bindParam(":tipo_factura",$datos['tipo_factura'],PDO::PARAM_STR);
         $stmt->bindParam(":tipo_pago",$datos['tipo_pago'],PDO::PARAM_STR);
         $stmt->bindParam(":total_general",$datos['total_general'],PDO::PARAM_STR);
@@ -25,11 +26,13 @@ class ModeloCompras{
             $st=5555;
             foreach ($producto as $value) {
                 $id=$value['id'];
-                $stmt1=Conexion::conectar()->prepare("INSERT INTO detalle_compra(cantidad,precio,compra_id,producto_id,subtotal) VALUES (:cantidad,:precio,:compra_id,:producto_id,:subtotal)");
+                $stmt1=Conexion::conectar()->prepare("INSERT INTO detalle_compra(cantidad,precio,descuento,interes,compra_id,producto_id,subtotal) VALUES (:cantidad,:precio,:descuento,:interes,:compra_id,:producto_id,:subtotal)");
                 
                    
                 $stmt1->bindParam(":cantidad",$value['cantidad'],PDO::PARAM_STR);
                 $stmt1->bindParam(":precio",$value['precio'],PDO::PARAM_STR);
+                $stmt1->bindParam(":descuento",$value['descuento'],PDO::PARAM_STR);
+                $stmt1->bindParam(":interes",$value['interes'],PDO::PARAM_STR);
                 $stmt1->bindParam(":compra_id",$resultado,PDO::PARAM_INT);
                 $stmt1->bindParam(":producto_id",$value['id'],PDO::PARAM_INT);
                 $stmt1->bindParam(":subtotal",$value['total'],PDO::PARAM_STR);
@@ -108,8 +111,6 @@ class ModeloCompras{
              $stmt -> execute();
  
              return $stmt -> fetchAll();
-
-             
  
          }else{
              $stmt= Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' and '$fechaFinal'");
@@ -145,71 +146,7 @@ class ModeloCompras{
             }
         }
 
-        static public function mdlMostrarCompraspormes($fechaInicial,$fechaFinal,$item,$valor,$tabla){
-            if($fechaInicial== null){
-                $consulta=Conexion::conectar()->prepare("SELECT SUM(total_general) AS total_compra, MONTHNAME(fecha)AS mes 
-                FROM $tabla GROUP BY MONTH(fecha) DESC;");
-                $consulta->execute();
-                return $consulta->fetchAll();
-            }else{
-                return 'no se ha podido mostrar';
-            }
-        }
-
-        static public function mdlmostrarProductosMascomprados($item,$tabla){
-            if($item == null){
-                $consulta=Conexion::conectar()->prepare("SELECT SUM(cantidad) AS cantidad_producto,
-                productos.`descripcion`
-                FROM detalle_compra
-                INNER JOIN productos ON detalle_compra.`producto_id`= productos.`id_producto`
-                GROUP BY producto_id ORDER BY cantidad_producto DESC LIMIT 0,10;");
-                $consulta->execute();
-                return $consulta->fetchAll();
-
-
-            }
-        }
-        static public function mdlSumaCantidadCompras($item,$tabla){
-            
-		$stmt = Conexion::conectar()->prepare("SELECT SUM(cantidad) as total FROM $tabla");
-
-		$stmt -> execute();
-
-		return $stmt -> fetch();
-
-		$stmt -> close();
-
-		$stmt = null;
-        }
-
-        static public function mostrarproveedoresconmascompras($tabla){
-            $consulta=Conexion::conectar()->prepare("SELECT
-            SUM(detalle_compra.`precio`) AS total_precio,
-            personas.`nombre`,
-            personas.`apellido`,
-            proveedores.`razon_social`
-            FROM $tabla
-            INNER JOIN proveedores ON compras.`proveedor_id`= proveedores.`id_proveedor`
-            INNER JOIN personas ON personas.`id_persona`= proveedores.`persona_id`
-            INNER JOIN detalle_compra ON detalle_compra.`compra_id`= compras.`id_compra`
-            GROUP BY proveedor_id ORDER BY total_precio DESC LIMIT 0,10;");
-
-            $consulta->execute();
-            return $consulta->fetchAll();
-        }
-
-        static public function ActivarCompra($tabla,$item1,$estado,$item2,$id_user){
-            $consulta=Conexion::conectar()->prepare("UPDATE $tabla SET estado = :estado WHERE id_compra= $id_user");
-            $consulta->bindParam(":estado",$estado,PDO::PARAM_STR);
-            $consulta->bindParam(":id_compra",$id_user,PDO::PARAM_INT);
-
-            if($consulta->execute()){
-                return 'ok';
-            }else{
-                return 'error';
-            }
-        }
-       
-
     }
 
+
+?>

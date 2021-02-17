@@ -2,8 +2,6 @@
 VARIABLE LOCAL STORAGE
 =============================================*/
 
-
-
 if(localStorage.getItem("capturarRango2") != null){
 
 	$("#daterange-btn2 span").html(localStorage.getItem("capturarRango2"));
@@ -14,7 +12,6 @@ if(localStorage.getItem("capturarRango2") != null){
 	$("#daterange-btn2 span").html('<i class="fa fa-calendar"></i> Rango de fecha')
 
 }
-
 
 /*=============================================
 RANGO DE FECHAS
@@ -161,67 +158,6 @@ $('#daterange-btn3').daterangepicker(
   $(".daterangepicker.opensright .range_inputs .cancelBtn").on("click", function(){
   
       localStorage.removeItem("capturarRango3");
-      localStorage.clear();
-      window.location = "reportes";
-  })
-  
-
-  
-  
-  
-  
-/*=============================================
-VARIABLE LOCAL STORAGE RANGO POR PRODUCTOS
-=============================================*/
-
-if(localStorage.getItem("capturarRango11") != null){
-
-	$("#daterange-btn11 span").html(localStorage.getItem("capturarRango11"));
-
-
-}else{
-
-	$("#daterange-btn11 span").html('<i class="fa fa-calendar"></i> Rango de fecha')
-
-}
-/*=============================================
-RANGO DE FECHAS POR MES
-=============================================*/
-$('#daterange-btn11').daterangepicker(
-    {
-      ranges   : {
-        
-        'Este mes'  : [moment().startOf('month'), moment().endOf('month')],
-        'Último mes'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      },
-      startDate: moment(),
-      endDate  : moment()
-    },
-    function (start, end) {
-      $('#daterange-btn11 span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-  
-      var fechaInicial = start.format('YYYY-MM-DD');
-  
-      var fechaFinal = end.format('YYYY-MM-DD');
-  
-      var capturarRango = $("#daterange-btn11 span").html();
-     
-         localStorage.setItem("capturarRango11", capturarRango);
-  
-       window.location = "index.php?ruta=reportes&fechaInicialporProductos="+fechaInicial+"&fechaFinalporProductos="+fechaFinal;
-        console.log(fechaInicial,fechaFinal);
-  
-    }
-  
-  )
-  
-  /*=============================================
-  CANCELAR RANGO DE FECHAS
-  =============================================*/
-  
-  $(".daterangepicker.opensright .range_inputs .cancelBtn").on("click", function(){
-  
-      localStorage.removeItem("capturarRango11");
       localStorage.clear();
       window.location = "reportes";
   })

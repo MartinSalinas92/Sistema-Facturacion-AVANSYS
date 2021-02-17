@@ -7,7 +7,6 @@ class ControladorCategorias{
         CREAR USUARIOS
   =========================================================--  */
 
-
     static public function ctrCrearCategoria(){
 
         if(isset($_POST['nuevaCategoria'])){

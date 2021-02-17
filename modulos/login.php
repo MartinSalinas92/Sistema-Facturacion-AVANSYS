@@ -1,7 +1,7 @@
 <div id="back"></div>
 <div class="login-box">
   <div class="login-logo">
-    <img src="vistas/img/plantilla/color_logo_black.png" class="img-responsive" style="padding:30px 50px 0px 50px">
+    <img src="vistas/img/plantilla/Hebreos.jpg" class="img-responsive" style="padding:30px 50px 0px 50px">
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

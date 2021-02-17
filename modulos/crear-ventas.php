@@ -80,20 +80,20 @@
                                 
                                 <!--======================================================
                                ENTRADA DE CLIENTE
-                              =========================================================-->
-
+                              =============================================-->
+                              
                               <div class="form-group">
                                   <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-users"> </i> </span> 
                                       <select class="form-control" name="idCliente" required>
                                         <option value=""> Seleccionar Cliente </option>
                                         <?php
-                                        
-                                        $item=null;
-                                        $valor=null;
-                                        $cliente=ControladorClientes::ctrMostrarClientes($item,$valor);
-                                        foreach($cliente as $values){
-                                          echo '<option value= '.$values['id_cliente'].'>'.$values['nombre'].'  '.$values['apellido'].' </option>';
+                                        $item= null;
+                                        $valor= null;
+
+                                        $respuesta= ControladorClientes::ctrMostrarClientes($item,$valor);
+                                        foreach($respuesta as $values){
+                                          echo '<option value='.$values['id_cliente'].'>'.$values['nombre'].' </option>';
                                         }
                                   
                                         
@@ -137,7 +137,6 @@
 
                               <div class="form-group row nuevoProducto">
 
-                               
                                
                            
 
@@ -293,11 +292,11 @@
           <thead>
               <tr>
               <th>Imagen</th> 
+              <th>Nombre</th> 
               <th>descripcion</th> 
               <th>codigo</th> 
               <th>stock</th>
              <th>Acciones</th>
-             
               
               
               
@@ -314,16 +313,15 @@
              $valor= null;
  
              $productos=ControladorProductos::ctrMostrarProductos($item,$valor);
-            // var_dump($productos);
-              
+             /*var_dump($productos);*/
+ 
              foreach($productos as $values){
                
                echo'
                <tr>
  
                <td>';
-
-               if($values['estado'] !=0){
+            
              
                if($values['imagen'] !=''){
                  echo '<img src="'.$values['imagen'].'" class="img-fluid img-thumbnail" width=40px> ';
@@ -331,7 +329,7 @@
                echo ' <img src="vistas/img/productos/anonymous.png" class="img-fluid img-thumbnail" width=30px> </td>';
              }
              echo '
-
+                 <td>'.$values['nombre'].'</td>
                  <td>'.$values['descripcion'].'</td>
                  <td>'.$values['codigo'].'</td>';
  
@@ -348,14 +346,13 @@
                  }
  
                 
-                
                  echo'
                  
                 
                  <td> 
                  <div class="btn-group">
  
-                 <button class="btn btn-primary btnAgregarProductos" id="btnbtn'.$values['id_producto'].'" idPorducto="'.$values['id_producto'].'" onclick="editp(\''.$values['id_producto'].'\',\''.$values['descripcion'].'\',\''.$values['codigo'].'\',\''.$values['stock'].'\',\''.number_format($values['precio_venta'],2).'\');">
+                 <button class="btn btn-primary btnAgregarProductos" id="btnbtn'.$values['id_producto'].'" idPorducto="'.$values['id_producto'].'" onclick="editp(\''.$values['id_producto'].'\',\''.$values['nombre'].'\',\''.$values['descripcion'].'\',\''.$values['codigo'].'\',\''.$values['stock'].'\',\''.$values['precio_venta'].'\');">
            
                  <i class="fa fa-plus-square" aria-hidden="true"></i>
                  
@@ -374,17 +371,16 @@
                  </div>
                  
                  
-                 </td>';
-                }
+                 </td>
                  
                
                
                
                
-               '</tr>';
-                
+               </tr>';
+             }
              
-            }
+             
              ?>
                 
              
@@ -404,9 +400,8 @@
     </section>
 
     </div>
-    </div>
 
-    
+
      <!--======================================================
         MODAL AGREGAR  clientes
   =========================================================-->
@@ -442,7 +437,7 @@
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-user-o" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="nuevoApellido" placeholder="Ingresar Apellido">
+                <input type="text" class="form-control input-lg" name="nuevoApellido" placeholder="Ingresar Apellido" required>
             </div>
           </div> 
         <!--ENTRADA PARA EL DNI -->
@@ -456,28 +451,28 @@
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="nuevaLocalidad" placeholder="Ingresar la Localidad" required>
+                <input type="text" class="form-control input-lg" name="nuevaLocalidad" placeholder="Formosa Capital" required>
             </div>
           </div> 
         <!--ENTRADA PARA LA DIRECCION -->
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar la direccion " required>
+                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="b illia2 mz49 " required>
             </div>
           </div> 
         <!--ENTRADA PARA LA calle -->
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-road" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="nuevaCalle" placeholder="Ingresar las calles">
+                <input type="text" class="form-control input-lg" name="nuevaCalle" placeholder="arenales y mouchard">
             </div>
           </div> 
         <!--ENTRADA PARA EL NUMERO DE CALLE-->
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-street-view" aria-hidden="true"></i> </span>
-                <input type="text" class="form-control input-lg" name="numerodeCalle"  placeholder="Ingresar numero de calle">
+                <input type="text" class="form-control input-lg" name="numerodeCalle" >
             </div>
           </div> 
         
@@ -493,7 +488,7 @@
           <div class="form-group"> 
             <div class="input-group"> 
               <span class="input-group-addon"><i class="fa fa-contao""> </i> </span>
-                <input type="text" class="form-control input-lg" name="nuevoDepartamento" placeholder="ingresar numero de departamento">
+                <input type="text" class="form-control input-lg" name="nuevoDepartamento">
             </div>
           </div> 
         
@@ -505,7 +500,7 @@
       <?php
 
         $crearClientes= new ControladorClientes;
-        $crearClientes->ctrCrearClientesVentas();;
+        $crearClientes->ctrCrearClientesVentas();
 
       ?>
 
@@ -518,14 +513,8 @@
   
         </div>
 
+
       </div>
-
-    </div>
-
-  </div>
-
-</div>
-      
   
 
 

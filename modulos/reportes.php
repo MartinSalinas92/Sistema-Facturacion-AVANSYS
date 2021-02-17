@@ -76,18 +76,8 @@
             
             
             </div>
-
-
           
            <div class="col-xs-6">
-           
-        <button type="button" class="btn btn-default11" id="daterange-btn11">
-            <span> 
-              <i class="fa fa-calendar"></i> Rango de Fechas
-            </span>
-              <i class="fa fa-caret-down"></i>
-
-          </button> 
 
               <?php 
 

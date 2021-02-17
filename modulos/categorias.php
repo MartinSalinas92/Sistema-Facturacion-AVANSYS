@@ -53,7 +53,6 @@
               $categoria=ControladorCategorias::mostrarCategorias($item,$valor);
 
              /* var_dump($categoria);*/
-             
 
               foreach($categoria as $value){
                 echo '

@@ -58,9 +58,8 @@
             
             
             </thead>
-            <tbody>
-           
-           
+            <tbody> 
+            
             
               <?php 
 
@@ -83,7 +82,6 @@
 
                       echo '
                       <tr>
-                      <td>'.$value['id_compra'].'</td>
                       <td>'.$value['codigo_factura'].' </td>
                       <td>'.$value['tipo_factura'].' </td>
                       <td>'.$value['tipo_pago'].'</td>
@@ -102,9 +100,8 @@
                       $valorCliente = $value["proveedor_id"];
 
                       $respuestaProveedor = ControladorProveedores::crtMostrarProveedores($itemCliente,$valorCliente);
-                   
-                      echo '<td>'.$respuestaProveedor["razon_social"].'</td>';
 
+                      echo '<td>'.$respuestaProveedor["razon_social"].'</td>';
 
                       echo '<td>
 
@@ -112,12 +109,13 @@
 
                           
 
+                      <a href="inicio.php">
                         <button class="btn btn-info btnImprimirCompra"  codigo_venta='.$value['id_compra'].'>
 
                           <i class="fa fa-eye"></i>
 
                         </button>
-                      
+                      </a>
 
 
 
@@ -144,8 +142,6 @@
                       }
                     }else{
 
-                      
-
 
                       $fechaInicial=null;
                        $fechaFinal=null; 
@@ -164,7 +160,7 @@
                   
                                 echo '
                                 <tr>
-                                <td>'.$value['id_compra'].' </td>
+                                <td>'.$value['codigo_factura'].' </td>
                                 <td>'.$value['tipo_factura'].' </td>
                                 <td>'.$value['tipo_pago'].'</td>
                                 <td>'.number_format($value['total_general'],2).'</td>
@@ -184,9 +180,6 @@
                                 $respuestaProveedor = ControladorProveedores::crtMostrarProveedores($itemCliente,$valorCliente);
                   
                                 echo '<td>'.$respuestaProveedor["razon_social"].'</td>';
-
-                              
-          
                                 echo '<td>
 
 
@@ -196,7 +189,7 @@
                                 
                                   
                                 
-                                  <a href=index.php?ruta=detalle&idCompra='.$value['id_compra'].'>
+                              
                                   <button class="btn btn-info btnImprimirCompra"  idcompra='.$value['id_compra'].'
                                   
                                   data-toggle="modal" data-target="#MostrarDetalle">
@@ -204,28 +197,33 @@
                                     <i class="fa fa-eye"></i>
           
                                   </button>
-                                  </a>
                                 
-                            
-                      
-            
-            
-                              </td>
-              
                                 
-              
-                              
-                              
-                            
-                              
-                              </tr>';
-                                  }
           
-                            
+          
+          
+          
+          
+          
+                                <button class="btn btn-danger"><i class="fa fa-times"></i></button>';
+          
+                                // }
+          
+                                echo '</div>  
+          
+                                </td>
+          
+          
+          
+          
+          
+          
+          
+                                </tr>';
                                 
-                           }
+                  }
                   
-                      
+                  }
                   
                     
                     

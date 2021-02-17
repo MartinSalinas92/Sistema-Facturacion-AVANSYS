@@ -1,8 +1,12 @@
 
+
+
+
+
+
 /*=============================================
 RANGO DE FECHAS
 =============================================*/
-
 
 $('#daterange-btn-Compras').daterangepicker(
     {
@@ -98,7 +102,6 @@ $(".daterangepicker.opensleft .ranges li").on("click", function(){
 
 	}
 
-
 })
 
  /*=============================================
@@ -111,53 +114,6 @@ $('.btnImprimirCompra').click(function(){
 
 	window.location="index.php?ruta=detalle&idCompra="+idCompra;
 
-
-
-});
-
-/*=============================================
-ANULAR COMPRA
-=============================================*/
-
-$(document).on("click",".btnActivarCompra", function(){
-
-	var idCompras=$(this).attr("idCompra");
-	var estadoCompra=$(this).attr("estadoCompra");
-
-	var datos= new FormData();
-
-	datos.append("activarId", idCompras);
-	datos.append("activarCompra", estadoCompra);
-
-	$.ajax({
-		url:'ajax/compras.ajax.php?op=activar&id_user='+idCompras+'&estado='+estadoCompra,
-		 method:"POST",
-		 data:datos,
-		 cache:false,
-		 contenttype:false,
-		 processData:false,
-		 success:function(respuesta){
-		
-	
-		 }
-	
-	
-	
-	
-
-})
-if(estadoCompra==0){
-	$(this).removeClass('btn-success');
-	$(this).addClass('btn-danger');
-	$(this).html('desactivado');
-	$(this).attr('estadoCompra',1);
-  }else{
-	 $(this).removeClass('btn-danger');
-	 $(this).addClass('btn-success');
-	 $(this).html('activado');
-	 $(this).attr('estadoCompra',0);
-  
-  }
 
 
 });

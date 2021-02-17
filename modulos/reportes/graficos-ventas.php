@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 if(isset($_GET['fechaInicial'])){
     $fechaInicial=$_GET['fechaInicial'];
     $fechaFinal=$_GET['fechaFinal']; 
@@ -31,17 +28,16 @@ if(isset($_GET['fechaInicial'])){
     $fechaFinal=null; 
     $item= null;
     $valor= null;
-    $respuesta=ControladorVenta::ctrMostrarVentasReportess($item,$valor,$fechaInicial,$fechaFinal);
+    $respuesta=ControladorVenta::ctrMostrarVentas($item, $valor,$fechaInicial,$fechaFinal);
     
-
+    $arrayfechas= array();
     $fecha=null;
     foreach ($respuesta as $value){
-        $fecha .= '{y:"'.$value['Mes'].'", ventas: '.$value['Total'].'},';
+        $fecha .= '{y:"'.$value['fecha'].'", ventas: '.$value['total_general'].'},';
     // $var = array_push($arrayfechas, $fecha);       
     }
     $fecha = substr($fecha,0,-1);
     //var_dump($fecha);
-
 
 }
 
@@ -59,7 +55,7 @@ RANGO DE VENTAS
 <div class="box box-solid bg-teal-gradient"> 
     <div class="box-header"> 
         <i class="fa fa-th"></i>
-            <h3 class="box-title"> Grafico de Ventas </h3>
+            <h3 class="box-title"> Grafico de Ventas</h3>
     </div>
         <div class="box-body border-radius- nuevoGraficoVentas">
 
